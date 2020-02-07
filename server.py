@@ -5,6 +5,8 @@ import time
 import threading
 import pickle
 import codecs
+import numpy as np
+
 #communication
 from flask import *
 from flask_socketio import SocketIO
@@ -87,11 +89,40 @@ class FedNetServer(object):
         def handle_client_ready(data):
             print("client ready ", self.clientCounter, data)
       
+        def getAverages(self,client_weights):
+            new=[]
+            for i,weights in enumerate(client_weights):
+                if i == 0:
+                    new = weights
+                else:
+                    for j,weight in enumerate(weights):
+                        new[j] += weight
+            
+            for k,w in enumerate(new):
+                new[k] = np.divide(w,float(len(client_weights)))
+
+            return new
+
+
+
 
         @self.socketio.on('server_update')
         def handle_client_update(data):
+            if self.getCount:
+                self.tempCount=self.clientCounter
+                self.getCount=False
+                client_weights=[]
+
+            self.tempCount -= 1
             data = FedNetServer.deserializeObject(data)
-            print("weights received ",data)
+            client_weights.append(data)
+            print("weights received ",len(client_weights))
+
+            if tempCount == 0:
+                self.new_weights = self.getAverages(client_weights)
+                time.sleep(30)
+                data=FedNetServer.serilalizeObject(self.new_weights)
+                emit('client_update',data,broadcast = True, namespace='/')
                 
             
     def start(self):

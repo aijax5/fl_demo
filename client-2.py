@@ -46,7 +46,7 @@ class LocalModel(object):
 
         history = self.model.fit(
             self.train_dataset.repeat(), 
-            epochs=2, 
+            epochs=4, 
             steps_per_epoch=500,
             validation_data=self.val_dataset.repeat(), 
             validation_steps=2
@@ -92,8 +92,7 @@ class FederatedClient(object):
             print('reconnect')
 
         def on_client_update(*args):
-            update = FederatedClient.deserializeObject(args[0])
-            # update = args[0]
+            update = args[0]
             #train one round
             
             print("received avg as ",update)
