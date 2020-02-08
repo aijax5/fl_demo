@@ -55,11 +55,19 @@ class LocalModel(object):
         # return model    
 
      
-    def trainOneEpoch(self, modelConfig):
-        pass
+    def trainOneEpoch(self):
+        history = self.model.fit(
+            self.train_dataset.repeat(), 
+            epochs=1, 
+            steps_per_epoch=500,
+            validation_data=self.val_dataset.repeat(), 
+            validation_steps=2
+        )
     
     def getWeights(self):
         return self.model.get_weights()
+    def setWeights(self,weights):
+        return self.model.set_weights(weights)
 
 class FederatedClient(object):
 
@@ -94,11 +102,14 @@ class FederatedClient(object):
         def on_client_update(*args):
             update = FederatedClient.deserializeObject(args[0])
             # update = args[0]
-            #train one round
-            
-            print("received avg as ",update)
+            self.localModel.setWeights(update)
+            print("received avg as ",len(update))
+            print("all good! training one more round!...")
+            self.localModel.trainOneEpoch()
+            print("\n\n sending in hot, new weights! ")
             # time.sleep(2)
-            # self.sio.emit('server_update', self.val)
+            data = FederatedClient.serilalizeObject(self.localModel.getWeights())
+            self.sio.emit('server_update', data)
 
         def on_init(data):
             print('lolli')
