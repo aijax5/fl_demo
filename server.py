@@ -122,6 +122,7 @@ class FedNetServer(object):
 
             if self.tempCount == 0:
                 self.new_weights = self.getAverages(self.client_weights)
+                self.client_weights.clear()
                 time.sleep(3)
                 data=FedNetServer.serilalizeObject(self.new_weights)
                 self.getCount=True
