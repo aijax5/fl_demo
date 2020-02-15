@@ -1,8 +1,4 @@
 tensorflow==2.1.0
-codecs==*
-socketIO_client
-flask
-flask_socketio
 scikit-learnasn1crypto==0.24.0
 backports.functools-lru-cache==1.4
 certifi==2019.11.28
