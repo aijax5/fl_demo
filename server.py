@@ -119,6 +119,7 @@ class FedNetServer(object):
 
             if self.tempCount == 0:
                 self.new_weights = self.getAverages(self.client_weights)
+                self.client_weights.clear()
                 time.sleep(3)
                 self.client_weights.clear()
                 print('null and void ',len(self.client_weights))
