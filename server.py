@@ -72,7 +72,7 @@ class FedNetServer(object):
             
             for k,w in enumerate(new):
                 new[k] = np.divide(w,float(len(client_weights)))
-
+            print( "avg i=2,0 ",new[2][0])
             return new
            
     def register_handles(self):
@@ -105,9 +105,6 @@ class FedNetServer(object):
       
         
 
-
-
-
         @self.socketio.on('server_update')
         def handle_client_update(data):
             if self.getCount:
@@ -123,6 +120,8 @@ class FedNetServer(object):
             if self.tempCount == 0:
                 self.new_weights = self.getAverages(self.client_weights)
                 time.sleep(3)
+                self.client_weights.clear()
+                print('null and void ',len(self.client_weights))
                 data=FedNetServer.serilalizeObject(self.new_weights)
                 self.getCount=True
                 emit('client_update',data,broadcast = True, namespace='/')

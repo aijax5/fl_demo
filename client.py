@@ -106,7 +106,7 @@ class FederatedClient(object):
             print("received avg as ",len(update))
             print("all good! training one more round!...")
             self.localModel.trainOneEpoch()
-            print("\n\n sending in hot, new weights! ")
+            print("\n\n sending in hot, new weights! 2,0 ",self.localModel.getWeights()[2][0] )
             # time.sleep(2)
             data = FederatedClient.serilalizeObject(self.localModel.getWeights())
             self.sio.emit('server_update', data)
