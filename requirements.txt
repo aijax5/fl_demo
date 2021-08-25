@@ -1,4 +1,4 @@
-tensorflow==2.1.0
+tensorflow==2.5.1
 scikit-learnasn1crypto==0.24.0
 backports.functools-lru-cache==1.4
 certifi==2019.11.28
@@ -70,7 +70,7 @@ scipy==1.4.1
 six==1.14.0
 socketIO-client==0.7.2
 tensorboard==2.1.0
-tensorflow==2.1.0
+tensorflow==2.5.1
 tensorflow-estimator==2.1.0
 termcolor==1.1.0
 uritemplate==3.0.1
