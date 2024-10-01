@@ -43,7 +43,7 @@ google-auth==1.11.0
 google-auth-oauthlib==0.4.1
 google-pasta==0.1.8
 greenlet==0.4.15
-grpcio==1.27.1
+grpcio==1.53.2
 h5py==2.10.0
 idna==2.8
 itsdangerous==1.1.0
