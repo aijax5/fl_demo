@@ -6,7 +6,7 @@ chardet==3.0.4
 cryptography==2.1.4
 cycler==0.10.0
 enum34==1.1.6
-idna==2.8
+idna==3.7
 ipaddress==1.0.17
 keyring==10.6.0
 keyrings.alt==3.0
@@ -45,7 +45,7 @@ google-pasta==0.1.8
 greenlet==0.4.15
 grpcio==1.27.1
 h5py==2.10.0
-idna==2.8
+idna==3.7
 itsdangerous==1.1.0
 itypes==1.1.0
 Jinja2==2.11.1
